@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                checkout scmGit(
+                branches: [[name: 'main']],
+                userRemoteConfigs: [[url: 'https://github.com/Marshmillo/python-checklist']])
+                sh "python -m pip install --upgrade pip"
+                sh "python -m pip install flake8"
+            }
+        }
+        stage('Unit Test') {
+            steps {
+                sh "pytest test.py"
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script{
+                    def scannerHome = tool 'SonarScanner';
+                    withSonarQubeEnv('SonarOwn') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
+    }
+}
