@@ -1,3 +1,3 @@
-output ip_nic_vm {
-    value = azurerm_public_ip.public_ip_devops.ip_address
+output "ip_servers" {
+    value = module.vm.ip_servers
 }

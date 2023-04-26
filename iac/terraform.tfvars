@@ -1,2 +1,5 @@
+region="East US"
 user = "adminuser"
-password = "Password1234!"
+password = "Alejo8#"
+prefix_name = "devops_varela"
+servers = [ "jenkins", "nginx" ]

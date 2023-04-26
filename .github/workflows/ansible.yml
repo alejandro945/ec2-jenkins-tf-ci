@@ -1,0 +1,31 @@
+name: Ejecutar Ansible Playbooks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install -r ansible/requirements.txt
+    
+    - name: Create inventory
+      run: echo "${{ secrets.INVENTORY }}" > inventory
+
+    - name: Create inventory
+      run: echo "${{ secrets.SECRETS_YML }}" > secrets.yml
+
+    - name: Run Ansible playbook
+      run: ansible-playbook ansible/playbook.yml -i inventory --extra-vars "@secrets.yml"
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false

@@ -1,9 +1,24 @@
-variable user {
-  type = string
-  description = "Usuario de conexión a la maquina virtual"
+variable "region" {
+    type = string
+    description = "region de despliegue"
 }
 
-variable password {
-  type = string
-  description = "Password de conexión a la maquina virtual"
+variable "prefix_name" {
+    type = string
+    description = "prefijo para nombres de recursos"
+}
+
+variable "user" {
+    type = string
+    description = "usuario ssh"
+}
+
+variable "password" {
+    type = string
+    description = "password ssh"
+}
+
+variable "servers" {
+    type = set(string)
+    description = "nombre de los servidores que se van a desplegar"
 }
