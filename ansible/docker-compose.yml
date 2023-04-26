@@ -11,7 +11,7 @@ services:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     user: root
     ports:
-      - "80:8080"
+      - "8080:8080"
       - "8443:8443"
       - "50000:50000"
     expose:
